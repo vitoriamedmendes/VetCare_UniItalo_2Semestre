@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Tecnologia e privacidade{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">SISTEMAS OPERACIONAIS</span><h1>Infraestrutura, tecnologia e dados</h1><p>Conteúdo de apoio à apresentação interdisciplinar do VetCare.</p></div></div>
+<section class="panel prose">
+<h2>Hardware e software</h2><p><b>Hardware</b> é a parte física, como computadores, monitores, roteadores, switches e dispositivos de armazenamento. <b>Software</b> são os programas e sistemas que instruem o hardware, como o sistema operacional, o navegador e a aplicação VetCare.</p>
+<h2>Tipos e estrutura de sistemas operacionais</h2><p>Sistemas operacionais podem ser encontrados em computadores, servidores e dispositivos móveis. Eles fazem a interface entre aplicações e hardware, oferecendo serviços para execução de programas e gerenciamento dos recursos.</p>
+<h2>Gerenciamento de recursos</h2><ul><li><b>Memória:</b> distribui e controla o uso da memória pelos processos.</li><li><b>Arquivos:</b> organiza dados em arquivos e diretórios. O VetCare utiliza um arquivo SQLite para persistência local.</li><li><b>Processos:</b> gerencia programas em execução, como o servidor Flask.</li><li><b>Dispositivos:</b> coordena o acesso a teclado, tela, armazenamento e rede.</li></ul>
+<h2>Windows NT, Unix e VMS</h2><p>São famílias ou sistemas operacionais históricos relevantes para estudar arquitetura, gerenciamento de recursos, segurança e execução de processos. A equipe deve complementar esta seção com pesquisa bibliográfica e comparação técnica.</p>
+<h2>Cuidados com os dados</h2><p>Este protótipo não possui login nem controle de permissões e deve ser usado apenas com dados fictícios na demonstração. Uma versão real precisa de autenticação, autorização, cópias de segurança, HTTPS e adequação à LGPD.</p>
+</section>
+{% endblock %}

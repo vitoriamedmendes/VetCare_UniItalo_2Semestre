@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Animais{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">CADASTRO E CONSULTA</span><h1>Animais</h1><p>Cadastre, pesquise e atualize os pacientes da clínica.</p></div><a class="btn" href="{{ url_for('novo_animal') }}">＋ Novo animal</a></div>
+<form class="search" method="get"><input name="q" value="{{ q }}" placeholder="Pesquisar por animal, tutor ou espécie"><button class="btn">Pesquisar</button>{% if q %}<a class="btn btn-muted" href="{{ url_for('animais') }}">Limpar</a>{% endif %}</form>
+<div class="panel">
+{% if animais %}
+<div class="table-wrap"><table><thead><tr><th>Animal</th><th>Espécie / raça</th><th>Tutor</th><th>Telefone</th><th>Ações</th></tr></thead><tbody>
+{% for a in animais %}<tr><td><strong>{{ a.nome }}</strong><small class="sub">ID #{{ a.id }}</small></td><td>{{ a.especie }}{% if a.raca %} / {{ a.raca }}{% endif %}</td><td>{{ a.tutor }}</td><td>{{ a.telefone or "—" }}</td><td class="actions"><a class="text-link" href="{{ url_for('editar_animal', animal_id=a.id) }}">Editar</a><form method="post" action="{{ url_for('excluir_animal', animal_id=a.id) }}" onsubmit="return confirm('Deseja excluir este cadastro?')"><button class="link-danger">Excluir</button></form></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="empty">Nenhum animal encontrado. Use “Novo animal” para começar.</div>{% endif %}
+</div>
+{% endblock %}

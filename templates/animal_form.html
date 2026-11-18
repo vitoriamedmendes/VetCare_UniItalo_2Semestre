@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ "Editar animal" if animal else "Novo animal" }}{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">FICHA DO PACIENTE</span><h1>{{ "Editar cadastro" if animal else "Cadastrar animal" }}</h1><p>Os campos com * são obrigatórios.</p></div></div>
+<form class="panel form-grid" method="post">
+  <label>Nome do animal *<input name="nome" required value="{{ animal.nome if animal else '' }}"></label>
+  <label>Espécie *<select name="especie" required><option value="">Selecione</option>{% for e in ["Cão","Gato","Ave","Roedor","Réptil","Outro"] %}<option value="{{ e }}" {% if animal and animal.especie==e %}selected{% endif %}>{{ e }}</option>{% endfor %}</select></label>
+  <label>Raça<input name="raca" value="{{ animal.raca if animal else '' }}"></label>
+  <label>Idade (anos)<input type="number" min="0" name="idade" value="{{ animal.idade if animal and animal.idade is not none else '' }}"></label>
+  <label>Sexo<select name="sexo"><option value="">Não informado</option>{% for s in ["Macho","Fêmea"] %}<option {% if animal and animal.sexo==s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></label>
+  <label>Nome do tutor *<input name="tutor" required value="{{ animal.tutor if animal else '' }}"></label>
+  <label>Telefone do tutor<input name="telefone" placeholder="(11) 99999-9999" value="{{ animal.telefone if animal else '' }}"></label>
+  <label class="full">Observações<textarea name="observacoes" rows="4">{{ animal.observacoes if animal else '' }}</textarea></label>
+  <div class="form-actions"><a class="btn btn-muted" href="{{ url_for('animais') }}">Cancelar</a><button class="btn">Salvar cadastro</button></div>
+</form>
+{% endblock %}

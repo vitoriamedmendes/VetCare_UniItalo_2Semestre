@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Sobre o projeto{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">CONHEÇA O VETCARE</span><h1>Tecnologia para organizar o cuidado animal.</h1><p>Uma proposta de sistema digital para apoiar a rotina administrativa de uma clínica veterinária.</p></div></div>
+<section class="panel prose">
+<h2>Objetivo do sistema</h2><p>Centralizar informações dos animais, tutores, serviços e atendimentos, facilitando a consulta ao histórico e o acompanhamento administrativo da clínica.</p>
+<h2>Objetivos de Desenvolvimento Sustentável</h2><p>Proposta de alinhamento ao <b>ODS 3 – Saúde e Bem-Estar</b>, da Agenda 2030 da ONU. O projeto contribui de forma indireta ao apoiar a organização dos serviços veterinários e o cuidado responsável com os animais. A justificativa e o impacto esperado devem ser fundamentados na documentação acadêmica.</p>
+<h2>Funcionalidades</h2><ul><li>Cadastro e manutenção de animais.</li><li>Registro de atendimentos e serviços.</li><li>Consulta ao histórico e relatórios.</li><li>Controle básico de faturamento.</li><li>Simulação de custos de infraestrutura.</li></ul>
+<h2>Ferramentas e tecnologias</h2><p>HTML, CSS e JavaScript na interface; Python e Flask no processamento das requisições; SQLite no armazenamento local dos dados.</p>
+<h2>Contextualização tecnológica</h2><p>O sistema é executado em um sistema operacional, utiliza memória e processos para executar a aplicação e arquivos para armazenar o banco de dados. O navegador acessa a aplicação por meio da rede local.</p>
+<p><a href="{{ url_for('privacidade') }}">Leia as informações sobre dados e privacidade.</a></p>
+</section>
+{% endblock %}

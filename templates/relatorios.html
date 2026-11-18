@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Relatórios{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">ACOMPANHAMENTO</span><h1>Relatórios e faturamento</h1><p>Consulte os registros e acompanhe os valores dos atendimentos.</p></div><button class="btn btn-muted" onclick="window.print()">Imprimir relatório</button></div>
+<div class="stats"><article class="stat"><span>Faturamento concluído</span><strong>R$ {{ "%.2f"|format(faturamento)|replace(".", ",") }}</strong><small>Não inclui pendentes ou cancelados</small></article>
+{% for s in por_status %}<article class="stat"><span>{{ s.status }}</span><strong>{{ s.quantidade }}</strong><small>Valor: R$ {{ "%.2f"|format(s.total)|replace(".", ",") }}</small></article>{% endfor %}</div>
+<section class="panel section-gap"><h2>Histórico completo</h2>
+{% if historico %}<div class="table-wrap"><table><thead><tr><th>Data</th><th>Animal</th><th>Tutor</th><th>Atendimento</th><th>Valor</th><th>Status</th></tr></thead><tbody>{% for a in historico %}<tr><td>{{ a.data_atendimento }}</td><td>{{ a.animal }}</td><td>{{ a.tutor }}</td><td>{{ a.tipo }}</td><td>R$ {{ "%.2f"|format(a.valor)|replace(".", ",") }}</td><td>{{ a.status }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty">Os atendimentos registrados aparecerão aqui.</div>{% endif %}
+</section>
+{% endblock %}

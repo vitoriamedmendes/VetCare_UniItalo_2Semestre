@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Serviços{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">CATÁLOGO DA CLÍNICA</span><h1>Serviços</h1><p>Mantenha uma lista dos serviços oferecidos e seus preços de referência.</p></div></div>
+<form class="panel form-grid" method="post">
+<h2 class="full">Cadastrar serviço</h2>
+<label>Nome do serviço *<input name="nome" required placeholder="Ex.: Consulta veterinária"></label>
+<label>Preço (R$) *<input name="preco" type="number" min="0" step="0.01" required></label>
+<label class="full">Descrição<textarea name="descricao" rows="2"></textarea></label>
+<div class="form-actions"><button class="btn">Adicionar serviço</button></div>
+</form>
+<section class="panel section-gap"><h2>Serviços cadastrados</h2>
+{% if servicos %}<div class="table-wrap"><table><thead><tr><th>Serviço</th><th>Descrição</th><th>Preço</th><th></th></tr></thead><tbody>{% for s in servicos %}<tr><td><strong>{{ s.nome }}</strong></td><td>{{ s.descricao or "—" }}</td><td>R$ {{ "%.2f"|format(s.preco)|replace(".", ",") }}</td><td><form method="post" action="{{ url_for('excluir_servico', servico_id=s.id) }}" onsubmit="return confirm('Remover este serviço?')"><button class="link-danger">Excluir</button></form></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty">Nenhum serviço cadastrado.</div>{% endif %}
+</section>
+{% endblock %}

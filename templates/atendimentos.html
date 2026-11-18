@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Atendimentos{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">ROTINA DA CLÍNICA</span><h1>Atendimentos</h1><p>Registre consultas, procedimentos e seus respectivos valores.</p></div></div>
+{% if animais %}
+<form class="panel form-grid" method="post">
+  <h2 class="full">Novo atendimento</h2>
+  <label>Animal *<select name="animal_id" required><option value="">Selecione o animal</option>{% for a in animais %}<option value="{{ a.id }}">{{ a.nome }} • Tutor: {{ a.tutor }}</option>{% endfor %}</select></label>
+  <label>Data *<input type="date" name="data_atendimento" value="{{ hoje }}" required></label>
+  <label>Tipo de atendimento *<input name="tipo" placeholder="Ex.: Consulta, vacinação..." required></label>
+  <label>Valor (R$) *<input type="number" name="valor" min="0" step="0.01" value="0.00" required></label>
+  <label class="full">Descrição / observações<textarea name="descricao" rows="3"></textarea></label>
+  <div class="form-actions"><button class="btn">Registrar atendimento</button></div>
+</form>
+{% else %}<div class="alert erro">Cadastre pelo menos um animal antes de registrar um atendimento.</div><a class="btn" href="{{ url_for('novo_animal') }}">Cadastrar animal</a>{% endif %}
+<section class="panel section-gap"><h2>Histórico de atendimentos</h2>
+{% if atendimentos %}<div class="table-wrap"><table><thead><tr><th>Data</th><th>Animal</th><th>Tipo</th><th>Valor</th><th>Status</th><th>Atualizar</th></tr></thead><tbody>
+{% for a in atendimentos %}<tr><td>{{ a.data_atendimento }}</td><td><strong>{{ a.animal }}</strong><small class="sub">{{ a.tutor }}</small></td><td>{{ a.tipo }}{% if a.descricao %}<small class="sub">{{ a.descricao }}</small>{% endif %}</td><td>R$ {{ "%.2f"|format(a.valor)|replace(".", ",") }}</td><td><span class="status">{{ a.status }}</span></td><td><form method="post" action="{{ url_for('alterar_status', atendimento_id=a.id) }}" class="inline-form"><select name="status"><option {% if a.status=="Pendente" %}selected{% endif %}>Pendente</option><option {% if a.status=="Concluído" %}selected{% endif %}>Concluído</option><option {% if a.status=="Cancelado" %}selected{% endif %}>Cancelado</option></select><button class="btn btn-small">Salvar</button></form></td></tr>{% endfor %}
+</tbody></table></div>{% else %}<div class="empty">Nenhum atendimento registrado.</div>{% endif %}
+</section>
+{% endblock %}

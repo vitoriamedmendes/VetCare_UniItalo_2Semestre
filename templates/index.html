@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Painel inicial{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <span class="eyebrow">GESTÃO INTELIGENTE E CUIDADO ANIMAL</span>
+    <h1>Cuidar melhor começa com uma gestão organizada.</h1>
+    <p>Centralize cadastros, atendimentos, serviços e informações da clínica em um só lugar.</p>
+    <a class="btn btn-light" href="{{ url_for('novo_animal') }}">＋ Cadastrar animal</a>
+  </div>
+  <div class="hero-art">🐾</div>
+</section>
+<div class="section-heading"><div><span class="eyebrow">VISÃO GERAL</span><h2>Painel da clínica</h2></div></div>
+<section class="stats">
+  <article class="stat"><span>Animais cadastrados</span><strong>{{ total_animais }}</strong><small>Registros no sistema</small></article>
+  <article class="stat"><span>Atendimentos</span><strong>{{ total_atendimentos }}</strong><small>Histórico registrado</small></article>
+  <article class="stat"><span>Faturamento concluído</span><strong>R$ {{ "%.2f"|format(faturamento)|replace(".", ",") }}</strong><small>Atendimentos concluídos</small></article>
+</section>
+<section class="panel">
+  <div class="section-heading"><div><h2>Atendimentos recentes</h2><p>Últimos registros adicionados ao sistema.</p></div><a class="text-link" href="{{ url_for('atendimentos') }}">Ver todos →</a></div>
+  {% if ultimos %}
+  <div class="table-wrap"><table><thead><tr><th>Animal</th><th>Data</th><th>Tipo</th><th>Status</th></tr></thead><tbody>
+  {% for item in ultimos %}<tr><td><strong>{{ item.animal }}</strong></td><td>{{ item.data_atendimento }}</td><td>{{ item.tipo }}</td><td><span class="status">{{ item.status }}</span></td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empty">Ainda não há atendimentos. Cadastre um animal e registre o primeiro atendimento.</div>{% endif %}
+</section>
+<section class="quick-links">
+  <a class="quick-card" href="{{ url_for('animais') }}"><span>🐶</span><b>Cadastro de animais</b><small>Consultar e manter os dados</small></a>
+  <a class="quick-card" href="{{ url_for('atendimentos') }}"><span>🩺</span><b>Atendimentos</b><small>Registrar consultas e procedimentos</small></a>
+  <a class="quick-card" href="{{ url_for('relatorios') }}"><span>📊</span><b>Relatórios</b><small>Acompanhar histórico e faturamento</small></a>
+</section>
+{% endblock %}

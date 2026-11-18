@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Simulador de custos{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">INFRAESTRUTURA TECNOLÓGICA</span><h1>Simulador de custos</h1><p>Estime o investimento em equipamentos, cabeamento, mão de obra e implantação.</p></div></div>
+<form class="panel form-grid" method="post">
+<h2 class="full">Equipamentos e valores unitários</h2>
+<label>Quantidade de computadores gamers<input name="computadores" type="number" min="0" value="2" required></label>
+<label>Preço por computador (R$)<input name="preco_computador" type="number" min="0" step="0.01" value="4500" required></label>
+<label>Quantidade de monitores<input name="monitores" type="number" min="0" value="2" required></label>
+<label>Preço por monitor (R$)<input name="preco_monitor" type="number" min="0" step="0.01" value="900" required></label>
+<label>Quantidade de switches<input name="switches" type="number" min="0" value="1" required></label>
+<label>Preço por switch (R$)<input name="preco_switch" type="number" min="0" step="0.01" value="450" required></label>
+<label>Quantidade de roteadores<input name="roteadores" type="number" min="0" value="1" required></label>
+<label>Preço por roteador (R$)<input name="preco_roteador" type="number" min="0" step="0.01" value="350" required></label>
+<label>Metros de cabeamento<input name="metros_cabo" type="number" min="0" value="100" required></label>
+<label>Preço por metro de cabo (R$)<input name="preco_metro" type="number" min="0" step="0.01" value="3.50" required></label>
+<label>Mão de obra total (R$)<input name="mao_obra" type="number" min="0" step="0.01" value="1800" required></label>
+<label>Tempo de implantação (dias)<input name="dias_implantacao" type="number" min="0" step="1" value="5" required></label>
+<div class="form-actions"><button class="btn">Calcular investimento</button></div>
+</form>
+{% if resultado %}
+<section class="result-card"><span class="eyebrow">RESULTADO DA SIMULAÇÃO</span><p>Investimento estimado</p><strong>R$ {{ "%.2f"|format(resultado.total)|replace(".", ",") }}</strong><p>Tempo estimado de implantação: <b>{{ resultado.dias|int }} dia(s)</b>.</p><small>Estimativa acadêmica. Pesquise cotações reais e registre as fontes no documento do projeto.</small></section>
+{% endif %}
+{% endblock %}
