@@ -293,6 +293,7 @@ def privacidade():
 def pagina_nao_encontrada(_):
     return render_template("404.html"), 404
 
+inicializar_banco()
+
 if __name__ == "__main__":
-    inicializar_banco()
     app.run(debug=True)
